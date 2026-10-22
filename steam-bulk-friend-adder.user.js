@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Steam Bulk Friend Adder
 // @namespace    steam-bulk-friend-adder
-// @version      1.0.1
+// @version      1.0.2
 // @description  Paste SteamID64,name lines on your Steam friends page to send friend requests and set nicknames automatically.
 // @match        https://steamcommunity.com/*
 // @grant        GM_getValue
@@ -218,7 +218,7 @@ GM_addStyle(`
       <label>One per line: <code>SteamID64,Name</code></label>
       <textarea class="sbfa-input" spellcheck="false" placeholder="76561198000000000,Bob&#10;76561198000000001,Alice"></textarea>
       <div class="sbfa-row">
-        <label>Prefix <input class="sbfa-prefix" type="text" placeholder="e.g. [CS] "></label>
+        <label>Prefix <input class="sbfa-prefix" type="text" placeholder="e.g. #"></label>
         <label>Delay (s) <input class="sbfa-delay" type="number" min="1" step="0.5" value="3"></label>
       </div>
       <div class="sbfa-preview"></div>

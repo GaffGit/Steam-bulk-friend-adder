@@ -9,7 +9,7 @@ Paste lines like:
 ```
 
 It sends a friend request to each SteamID64 and sets the nickname to the name after the comma.
-The optional **Prefix** is put in front of every nickname (e.g. `[CS] ` → `[CS] Bob`).
+The optional **Prefix** is put in front of every nickname (e.g. `#` → `#Bob`).
 
 ## Install
 1. Open `chrome://extensions` (or `edge://extensions`).
