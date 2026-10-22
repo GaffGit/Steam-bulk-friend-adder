@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Steam Bulk Friend Adder",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Paste SteamID64,name lines on your Steam friends page to send friend requests and set nicknames automatically.",
   "permissions": ["storage"],
   "host_permissions": ["https://steamcommunity.com/*"],

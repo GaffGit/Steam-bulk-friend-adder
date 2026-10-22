@@ -19,6 +19,7 @@ The optional **Prefix** is put in front of every nickname (e.g. `#` → `#Bob`).
 
 ## Notes
 - A SteamID64 has 17 digits and starts with `7656`. Invalid lines are skipped and listed in the log.
+- Tick **Nicknames only** to rename people without sending friend requests (e.g. to switch everyone to a new prefix).
 - Lines without a name only get a friend request. Nicknames are cut to 32 characters, Steam's limit.
 - **Delay** sets the wait between people. Steam rate-limits invites, so keep it at around 3 seconds or more.
 - If Steam reports an invite limit or rate limit, the run stops. Any lines not yet processed stay in the box so you can continue later.

@@ -59,6 +59,8 @@
 #sbfa-panel .sbfa-row label { display: flex; align-items: center; gap: 4px; }
 #sbfa-panel .sbfa-prefix { width: 110px; }
 #sbfa-panel .sbfa-delay { width: 55px; }
+#sbfa-panel .sbfa-check { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+#sbfa-panel .sbfa-check input { margin: 0; }
 
 #sbfa-panel button {
   background: #2a475e;

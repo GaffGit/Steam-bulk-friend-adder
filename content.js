@@ -4,7 +4,7 @@
   console.log("[Steam Bulk Friend Adder] loaded");
 
   const NICKNAME_MAX = 32;
-  const STORAGE_KEYS = ["prefix", "delay", "input", "collapsed"];
+  const STORAGE_KEYS = ["prefix", "delay", "input", "collapsed", "nickOnly"];
 
   // ---------- Steam helpers ----------
 
@@ -109,6 +109,7 @@
         <label>Prefix <input class="sbfa-prefix" type="text" placeholder="e.g. #"></label>
         <label>Delay (s) <input class="sbfa-delay" type="number" min="1" step="0.5" value="3"></label>
       </div>
+      <label class="sbfa-check"><input class="sbfa-nickonly" type="checkbox"> Nicknames only (don't send friend requests)</label>
       <div class="sbfa-preview"></div>
       <div class="sbfa-row">
         <button class="sbfa-start">Start</button>
@@ -125,6 +126,7 @@
   const inputEl = $(".sbfa-input");
   const prefixEl = $(".sbfa-prefix");
   const delayEl = $(".sbfa-delay");
+  const nickOnlyEl = $(".sbfa-nickonly");
   const previewEl = $(".sbfa-preview");
   const startBtn = $(".sbfa-start");
   const stopBtn = $(".sbfa-stop");
@@ -137,6 +139,7 @@
       prefix: prefixEl.value,
       delay: delayEl.value,
       input: inputEl.value,
+      nickOnly: nickOnlyEl.checked,
       collapsed: panel.classList.contains("sbfa-collapsed"),
     });
   }
@@ -191,11 +194,12 @@
     }
 
     const delayMs = Math.max(1, parseFloat(delayEl.value) || 3) * 1000;
+    const nickOnly = nickOnlyEl.checked;
     running = true;
     stopRequested = false;
     startBtn.disabled = true;
     stopBtn.disabled = false;
-    inputEl.disabled = prefixEl.disabled = delayEl.disabled = true;
+    inputEl.disabled = prefixEl.disabled = delayEl.disabled = nickOnlyEl.disabled = true;
 
     let added = 0, named = 0, failed = 0;
     const remaining = [];
@@ -209,9 +213,16 @@
       progressEl.textContent = `Processing ${i + 1} / ${entries.length}…`;
       const nick = fullName(name).slice(0, NICKNAME_MAX);
 
+      if (nickOnly && !nick) {
+        log(`${id}: no name given, skipped`, "warn");
+        continue;
+      }
+
       try {
-        const fr = await addFriend(id, sessionId);
-        if (fr.ok) {
+        const fr = nickOnly ? { ok: true, skipped: true } : await addFriend(id, sessionId);
+        if (fr.skipped) {
+          // nicknames-only mode: no friend request
+        } else if (fr.ok) {
           added++;
           log(`${id}: friend request sent${fr.note ? ` (${fr.note})` : ""}`, "ok");
         } else {
@@ -230,6 +241,7 @@
             named++;
             log(`${id}: nickname set to "${nick}"`, "ok");
           } else {
+            if (nickOnly) failed++;
             log(`${id}: setting nickname failed – ${nr.reason}`, "error");
           }
         }
@@ -249,11 +261,13 @@
       inputEl.value = "";
     }
 
-    progressEl.textContent = `Done. Requests sent: ${added}, nicknames set: ${named}, failed: ${failed}.`;
+    progressEl.textContent = nickOnly
+      ? `Done. Nicknames set: ${named}, failed: ${failed}.`
+      : `Done. Requests sent: ${added}, nicknames set: ${named}, failed: ${failed}.`;
     running = false;
     startBtn.disabled = false;
     stopBtn.disabled = true;
-    inputEl.disabled = prefixEl.disabled = delayEl.disabled = false;
+    inputEl.disabled = prefixEl.disabled = delayEl.disabled = nickOnlyEl.disabled = false;
     updatePreview();
     save();
   }
@@ -274,7 +288,7 @@
     setCollapsed(!panel.classList.contains("sbfa-collapsed"));
     save();
   });
-  [inputEl, prefixEl, delayEl].forEach((el) =>
+  [inputEl, prefixEl, delayEl, nickOnlyEl].forEach((el) =>
     el.addEventListener("input", () => {
       updatePreview();
       save();
@@ -285,6 +299,7 @@
     if (data.prefix != null) prefixEl.value = data.prefix;
     if (data.delay != null) delayEl.value = data.delay;
     if (data.input != null) inputEl.value = data.input;
+    nickOnlyEl.checked = !!data.nickOnly;
     setCollapsed(!!data.collapsed);
     updatePreview();
   });
