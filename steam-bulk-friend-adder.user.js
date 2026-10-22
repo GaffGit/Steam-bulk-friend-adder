@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Steam Bulk Friend Adder
 // @namespace    steam-bulk-friend-adder
-// @version      1.1.0
+// @version      1.1.1
 // @description  Paste SteamID64,name lines on your Steam friends page to send friend requests and set nicknames automatically.
 // @match        https://steamcommunity.com/*
 // @grant        GM_getValue
@@ -113,7 +113,7 @@ GM_addStyle(`
 (() => {
   if (!/^\/(id|profiles|my)\/([^/]+\/)?friends/.test(location.pathname)) return;
   if (document.getElementById("sbfa-panel")) return;
-  console.log("[Steam Bulk Friend Adder] loaded");
+  console.log("[Steam Bulk Friend Adder] loaded v1.1.1");
 
   const NICKNAME_MAX = 32;
   const STORAGE_KEYS = ["prefix", "delay", "input", "collapsed", "nickOnly"];
@@ -213,7 +213,7 @@ GM_addStyle(`
   panel.id = "sbfa-panel";
   panel.innerHTML = `
     <div class="sbfa-header">
-      <span>Bulk Friend Adder</span>
+      <span>Bulk Friend Adder <small style="opacity:.6">v1.1.1</small></span>
       <button class="sbfa-toggle" title="Collapse">–</button>
     </div>
     <div class="sbfa-body">
