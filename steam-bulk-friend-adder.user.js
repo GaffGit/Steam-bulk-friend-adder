@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Steam Bulk Friend Adder
 // @namespace    steam-bulk-friend-adder
-// @version      1.0.0
+// @version      1.0.1
 // @description  Paste SteamID64,name lines on your Steam friends page to send friend requests and set nicknames automatically.
 // @match        https://steamcommunity.com/*
 // @grant        GM_getValue
