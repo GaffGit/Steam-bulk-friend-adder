@@ -1,5 +1,7 @@
 (() => {
+  if (!/^\/(id|profiles|my)\/([^/]+\/)?friends/.test(location.pathname)) return;
   if (document.getElementById("sbfa-panel")) return;
+  console.log("[Steam Bulk Friend Adder] loaded");
 
   const NICKNAME_MAX = 32;
   const STORAGE_KEYS = ["prefix", "delay", "input", "collapsed"];

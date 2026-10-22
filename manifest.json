@@ -8,8 +8,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://steamcommunity.com/id/*/friends*",
-        "https://steamcommunity.com/profiles/*/friends*"
+        "https://steamcommunity.com/*"
       ],
       "js": ["content.js"],
       "css": ["content.css"],
