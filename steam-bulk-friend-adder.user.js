@@ -9,6 +9,9 @@
 // @grant        GM_setValue
 // @grant        GM_addStyle
 // @run-at       document-idle
+// @homepageURL  https://github.com/GaffGit/Steam-bulk-friend-adder
+// @updateURL    https://raw.githubusercontent.com/GaffGit/Steam-bulk-friend-adder/main/steam-bulk-friend-adder.user.js
+// @downloadURL  https://raw.githubusercontent.com/GaffGit/Steam-bulk-friend-adder/main/steam-bulk-friend-adder.user.js
 // ==/UserScript==
 
 GM_addStyle(`

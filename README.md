@@ -27,4 +27,4 @@ The optional **Prefix** is put in front of every nickname (e.g. `[CS] ` → `[CS
 ## Tampermonkey / Violentmonkey (userscript)
 1. Install [Tampermonkey](https://www.tampermonkey.net/) or Violentmonkey.
 2. On Chrome/Edge, turn on **Allow User Scripts** in Tampermonkey's extension details page (or **Developer mode** on older versions).
-3. Open the **Raw** link of `steam-bulk-friend-adder.user.js` in this repo and click **Install**.
+3. Click **[Install the userscript](https://raw.githubusercontent.com/GaffGit/Steam-bulk-friend-adder/main/steam-bulk-friend-adder.user.js)** and confirm in Tampermonkey.
